@@ -1,4 +1,4 @@
-import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get_it/get_it.dart';
@@ -14,10 +14,6 @@ class AppInitializer extends _$AppInitializer {
   Future<void> build() => _initialize();
 
   Future<void> _initialize() async {
-   /*  await Firebase.initializeApp(
-      options: DefaultFirebaseOptions.currentPlatform,
-    ); */
-
     await ScreenUtil.ensureScreenSize();
 
     // Initialize GetIt dependencies
@@ -29,7 +25,5 @@ class AppInitializer extends _$AppInitializer {
 
   void _initializeGetIt() {
     // Add your GetIt registrations here
-    // For example:
-    // getIt.registerSingleton<SomeService>(SomeService());
   }
 }
