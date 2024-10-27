@@ -3,6 +3,7 @@ import 'package:cashflow_ai/core/permissions/permission_handler.dart';
 import 'package:cashflow_ai/shared/shared.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:ionicons/ionicons.dart';
 
@@ -14,7 +15,8 @@ class PermissionDeniedScreen extends StatefulWidget {
   State<PermissionDeniedScreen> createState() => _PermissionDeniedScreenState();
 }
 
-class _PermissionDeniedScreenState extends State<PermissionDeniedScreen> with WidgetsBindingObserver {
+class _PermissionDeniedScreenState extends State<PermissionDeniedScreen>
+    with WidgetsBindingObserver {
   @override
   void initState() {
     super.initState();
@@ -35,7 +37,8 @@ class _PermissionDeniedScreenState extends State<PermissionDeniedScreen> with Wi
   }
 
   Future<void> _checkAndNavigateIfPermissionGranted() async {
-    final bool hasPermission = await PermissionHandler().hasRequiredPermissions();
+    final bool hasPermission =
+        await PermissionHandler().hasRequiredPermissions();
     if (hasPermission && mounted) {
       Navigator.of(context).pushReplacementNamed('/home');
     }
@@ -51,48 +54,66 @@ class _PermissionDeniedScreenState extends State<PermissionDeniedScreen> with Wi
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-               Text(
+              Text(
                 'This app requires SMS permission to read old SMS and incoming SMS to track your spending effectively.',
                 textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 18.sp, color: context.theme.colors.gunMetal,fontWeight: FontWeight.w500),
+                style: context.textTheme.bodyLarge.copyWith(
+                  fontSize: 18.sp,
+                  color: context.theme.colors.gunMetal,
+                  fontWeight: FontWeight.w600,
+                ),
               ),
               24.sbh,
               Column(
                 children: [
                   SizedBox(
-                    width: 300.w, 
+                    width: 300.w,
                     child: ElevatedButton.icon(
                       onPressed: () => openAppSettings(),
                       style: ElevatedButton.styleFrom(
-                        minimumSize: Size(double.infinity, 48.h), 
+                        minimumSize: Size(double.infinity, 48.h),
                         backgroundColor: context.colorScheme.onSurface,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(8.w),
                         ),
                       ),
-                      icon:  Icon(Ionicons.settings_sharp, color: context.colorScheme.onTertiary, size: 24.sp,),
-                      label:  Text(
+                      icon: Icon(
+                        Ionicons.settings_sharp,
+                        color: context.colorScheme.onTertiary,
+                        size: 20.sp,
+                      ),
+                      label: Text(
                         'Open Settings',
-                        style: TextStyle(color: context.colorScheme.onTertiary, fontSize: 16.sp), 
+                        style: context.textTheme.bodyLarge.copyWith(
+                          color: context.colorScheme.onTertiary,
+                          fontWeight: FontWeight.w500,
+                        ),
                       ),
                     ),
                   ),
                   25.sbh,
                   SizedBox(
-                    width: 300.w, 
+                    width: 300.w,
                     child: ElevatedButton.icon(
                       onPressed: () => requestPermission(),
                       style: ElevatedButton.styleFrom(
-                        minimumSize: Size(double.infinity, 48.h), 
+                        minimumSize: Size(double.infinity, 48.h),
                         backgroundColor: context.colorScheme.primary,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(8.w),
                         ),
                       ),
-                      icon: Icon(Ionicons.checkmark_circle, color: context.colorScheme.onPrimary, size: 24.sp,),
+                      icon: Icon(
+                        Ionicons.checkmark_circle,
+                        color: context.colorScheme.onPrimary,
+                        size: 20.sp,
+                      ),
                       label: Text(
                         'Ask Permission',
-                        style: TextStyle(color: context.colorScheme.onPrimary, fontSize: 16.sp), 
+                        style: context.textTheme.bodyLarge.copyWith(
+                          color: context.colorScheme.onPrimary,
+                          fontWeight: FontWeight.w500,
+                        ),
                       ),
                     ),
                   ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class AppTextTheme {
   final TextStyle displayLarge;
@@ -18,23 +19,23 @@ class AppTextTheme {
 
   static AppTextTheme build() {
     return AppTextTheme(
-      displayLarge: TextStyle(
+      displayLarge: GoogleFonts.inter(
         fontSize: 24.sp,
         fontWeight: FontWeight.bold,
       ),
-      displayMedium: TextStyle(
+      displayMedium: GoogleFonts.inter(
         fontSize: 20.sp,
         fontWeight: FontWeight.w600,
       ),
-      bodyLarge: TextStyle(
+      bodyLarge: GoogleFonts.inter(
         fontSize: 16.sp,
         fontWeight: FontWeight.normal,
       ),
-      bodyMedium: TextStyle(
+      bodyMedium: GoogleFonts.inter(
         fontSize: 14.sp,
         fontWeight: FontWeight.normal,
       ),
-      labelLarge: TextStyle(
+      labelLarge: GoogleFonts.inter(
         fontSize: 16.sp,
         fontWeight: FontWeight.w600,
       ),

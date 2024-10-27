@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import '../../shared/theme/app_colors.dart';
 import '../../shared/theme/app_theme_data.dart';
 import '../../shared/theme/app_text_theme.dart';
@@ -40,12 +41,14 @@ class UniversalThemeFactory extends AppThemeDataFactory {
           surfaceContainerHigh: colors.darkGunMetal,
         ),
         useMaterial3: true, // Material 3 is now default
-        textTheme: TextTheme(
+        textTheme: GoogleFonts.interTextTheme(TextTheme(
           displayLarge: textTheme.displayLarge,
           displayMedium: textTheme.displayMedium,
           bodyLarge: textTheme.bodyLarge,
           bodyMedium: textTheme.bodyMedium,
           labelLarge: textTheme.labelLarge,
+        )).copyWith(
+          
         ),
       ),
     );
