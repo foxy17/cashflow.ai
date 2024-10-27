@@ -25,14 +25,17 @@ class UniversalThemeFactory extends AppThemeDataFactory {
       textTheme: textTheme,
       materialTheme: ThemeData(
         colorScheme: ColorScheme.fromSeed(
+          brightness: Brightness.dark,
           seedColor: colors.emerald,
           // Use surface instead of background
           surface: colors.antiflashWhite,
           onSurface: colors.gunMetal,
           primary: colors.emerald,
+          onPrimary: colors.black,
           error: colors.bittersweet,
           onError: colors.antiflashWhite,
-          // Add surfaceContainer colors for proper elevation tinting
+          tertiary: colors.lightBlack,
+          onTertiary: colors.white,
           surfaceContainer: colors.platinum,
           surfaceContainerHigh: colors.darkGunMetal,
         ),

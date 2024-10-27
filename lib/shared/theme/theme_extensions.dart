@@ -10,4 +10,5 @@ extension ThemeExtension on BuildContext {
   AppTextTheme get textTheme => theme.textTheme;
   ThemeMode get themeMode => ThemeProvider.of(this).mode;
   void toggleTheme() => ThemeProvider.of(this).toggle();
+  ColorScheme get colorScheme => theme.materialTheme.colorScheme;
 }

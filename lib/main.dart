@@ -19,38 +19,37 @@ class MyApp extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return ThemeProvider(
-      notifier: AppTheme.uniform(
-        themeFactory: const UniversalThemeFactory(),
-        lightColors: AppColors(),
-        darkColors: AppColors(), // Create a dark version of colors
-        textTheme: AppTextTheme.build(),
-        defaultMode: ThemeMode.system,
-      ),
-      child: Builder(
-        builder: (context) {
-          return AppStartup(
-            onInitialized: (context) => ScreenUtilInit(
-              designSize: const Size(360, 690),
-              minTextAdapt: true,
-              splitScreenMode: true,
-              builder: (_, child) {
-                return MaterialApp.router(
-                  routerDelegate: _appRouter.delegate(),
-                  routerConfig: _appRouter.config(),
-                  routeInformationParser: _appRouter.defaultRouteParser(),
-                  title: 'Cashflow.ai',
-                  theme: context.theme.materialTheme,
-                  darkTheme: context.theme.materialTheme.copyWith(
-                    brightness: Brightness.dark,
-                  ),
-                  themeMode: context.themeMode,
-                );
-              },
-            ),
-          );
-        },
-      ),
+    return ScreenUtilInit(
+      designSize: const Size(360, 690),
+      minTextAdapt: true,
+      builder: (context, child) {
+        return ThemeProvider(
+          notifier: AppTheme.uniform(
+            themeFactory: const UniversalThemeFactory(),
+            lightColors: AppColors(),
+            darkColors: AppColors(), // Create a dark version of colors
+            textTheme: AppTextTheme.build(),
+            defaultMode: ThemeMode.system,
+          ),
+          child: Builder(
+            builder: (context) {
+              return AppStartup(
+                onInitialized: (context) {
+                  return MaterialApp.router(
+                    routerConfig: _appRouter.config(),
+                    title: 'Cashflow.ai',
+                    theme: context.theme.materialTheme,
+                    darkTheme: context.theme.materialTheme.copyWith(
+                      brightness: Brightness.dark,
+                    ),
+                    themeMode: context.themeMode,
+                  );
+                },
+              );
+            },
+          ),
+        );
+      },
     );
   }
 }
