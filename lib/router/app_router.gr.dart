@@ -10,6 +10,52 @@
 part of 'app_router.dart';
 
 /// generated route for
+/// [ErrorScreen]
+class ErrorRoute extends PageRouteInfo<ErrorRouteArgs> {
+  ErrorRoute({
+    Key? key,
+    required String error,
+    List<PageRouteInfo>? children,
+  }) : super(
+          ErrorRoute.name,
+          args: ErrorRouteArgs(
+            key: key,
+            error: error,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'ErrorRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      final args = data.argsAs<ErrorRouteArgs>();
+      return ErrorScreen(
+        key: args.key,
+        error: args.error,
+      );
+    },
+  );
+}
+
+class ErrorRouteArgs {
+  const ErrorRouteArgs({
+    this.key,
+    required this.error,
+  });
+
+  final Key? key;
+
+  final String error;
+
+  @override
+  String toString() {
+    return 'ErrorRouteArgs{key: $key, error: $error}';
+  }
+}
+
+/// generated route for
 /// [HomeTabScreen]
 class HomeTabRoute extends PageRouteInfo<void> {
   const HomeTabRoute({List<PageRouteInfo>? children})
@@ -24,6 +70,25 @@ class HomeTabRoute extends PageRouteInfo<void> {
     name,
     builder: (data) {
       return const HomeTabScreen();
+    },
+  );
+}
+
+/// generated route for
+/// [LoadingScreen]
+class LoadingRoute extends PageRouteInfo<void> {
+  const LoadingRoute({List<PageRouteInfo>? children})
+      : super(
+          LoadingRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'LoadingRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const LoadingScreen();
     },
   );
 }

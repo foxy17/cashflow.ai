@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get_it/get_it.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -19,11 +17,19 @@ class AppInitializer extends _$AppInitializer {
     // Initialize GetIt dependencies
     _initializeGetIt();
 
-    // Request SMS permission
-    await PermissionHandler.requestSmsPermission();
+    // Check SMS permission
+    final hasPermission = await PermissionHandler.checkSmsPermission();
+    if (!hasPermission) {
+      // The router will handle navigation to PermissionDeniedScreen
+      throw const PermissionDeniedException();
+    }
   }
 
   void _initializeGetIt() {
     // Add your GetIt registrations here
   }
+}
+
+class PermissionDeniedException implements Exception {
+  const PermissionDeniedException();
 }

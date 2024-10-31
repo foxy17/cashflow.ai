@@ -1,3 +1,4 @@
+import 'package:cashflow_ai/core/app_bootstrapper.dart';
 import 'package:cashflow_ai/shared/shared.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -9,16 +10,25 @@ import 'router/app_router.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  runApp(ProviderScope(child: MyApp()));
+  final appRouter = AppRouter();
+  
+  runApp(
+    ProviderScope(
+      child: MyApp(appRouter: appRouter),
+    ),
+  );
 }
 
-class MyApp extends ConsumerWidget {
-  MyApp({super.key}) : _appRouter = AppRouter();
+class MyApp extends StatelessWidget {
+  const MyApp({
+    super.key,
+    required this.appRouter,
+  });
 
-  final AppRouter _appRouter;
+  final AppRouter appRouter;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     return ScreenUtilInit(
       designSize: const Size(360, 690),
       minTextAdapt: true,
@@ -27,24 +37,23 @@ class MyApp extends ConsumerWidget {
           notifier: AppTheme.uniform(
             themeFactory: const UniversalThemeFactory(),
             lightColors: AppColors(),
-            darkColors: AppColors(), // Create a dark version of colors
+            darkColors: AppColors(),
             textTheme: AppTextTheme.build(),
             defaultMode: ThemeMode.system,
           ),
           child: Builder(
             builder: (context) {
-              return AppStartup(
-                onInitialized: (context) {
-                  return MaterialApp.router(
-                    routerConfig: _appRouter.config(),
-                    title: 'Cashflow.ai',
-                    theme: context.theme.materialTheme,
-                    darkTheme: context.theme.materialTheme.copyWith(
-                      brightness: Brightness.dark,
-                    ),
-                    themeMode: context.themeMode,
-                  );
-                },
+              return AppBootstrapper(
+                router: appRouter,
+                child: MaterialApp.router(
+                  routerConfig: appRouter.config(),
+                  title: 'Cashflow.ai',
+                  theme: context.theme.materialTheme,
+                  darkTheme: context.theme.materialTheme.copyWith(
+                    brightness: Brightness.dark,
+                  ),
+                  themeMode: context.themeMode,
+                ),
               );
             },
           ),
