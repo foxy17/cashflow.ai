@@ -1,0 +1,43 @@
+name: Test Structured Output
+
+on:
+  workflow_dispatch:
+    inputs:
+      flutter_version:
+        description: 'Flutter Version'
+        required: true
+        default: '3.24.4'
+        type: string
+
+jobs:
+  test:
+    name: Run OpenAI Tests
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ github.event.inputs.flutter_version }}
+          channel: 'stable'
+          cache: true
+      
+      - name: Install dependencies
+        run: flutter pub get
+        
+      - name: Run build_runner
+        run: flutter pub run build_runner build --delete-conflicting-outputs
+        
+      - name: Run test for structured output
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          CI: true
+        run: flutter test test/core/services/openai_service_test.dart
+        
+      - name: Check test results
+        if: failure()
+        run: |
+          echo "Tests failed! Please check the logs above for more details."
+          exit 1 
