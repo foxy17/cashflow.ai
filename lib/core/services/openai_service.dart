@@ -9,7 +9,7 @@ class OpenAIService {
   OpenAIClient? _client;
   String? _currentApiKey;
   ChatCompletionModel _defaultModel = const ChatCompletionModel.model(
-    ChatCompletionModels.gpt4TurboPreview,
+    ChatCompletionModels.gpt4oMini,
   );
 
   /// Updates the API key and recreates the client if necessary
