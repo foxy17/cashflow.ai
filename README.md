@@ -39,40 +39,54 @@ Before you begin, ensure you have the following installed:
      API_KEY=your_api_key_here
      ```
 
-4. **Run the app**:
+## 🧪 Running Tests
+
+There are several ways to run the tests with your OpenAI API key:
+
+### 1. Using Environment File
+
+1. Create a `.env.test` file in the root directory:
    ```bash
-   flutter run
+   cp .env.test.example .env.test
    ```
 
-## 📱 Building for Android
-
-To build the app for Android, follow these steps:
-
-1. Open the project in your preferred IDE.
-2. Ensure you have an Android emulator running or a physical device connected.
-3. Run the following command:
-   ```bash
-   flutter build apk
+2. Add your OpenAI API key to `.env.test`:
+   ```
+   OPENAI_API_KEY=your_api_key_here
    ```
 
-## 📄 Contributing
+3. Run the tests:
+   ```bash
+   flutter test
+   ```
 
-We welcome contributions! If you'd like to contribute to Cashflow AI, please follow these steps:
+### 2. Using Command Line
 
-1. Fork the repository.
-2. Create a new branch (`git checkout -b feature/YourFeature`).
-3. Make your changes and commit them (`git commit -m 'Add some feature'`).
-4. Push to the branch (`git push origin feature/YourFeature`).
-5. Open a pull request.
+Run tests directly with your API key:
 
-## 📝 License
+```bash
+flutter test test/core/services/openai_service_test.dart --dart-define=OPENAI_API_KEY=your_api_key_here
+```
 
-This project is licensed under the GNU General Public License v3.0 - see the [LICENSE](LICENSE) file for details.
+### 4. Using GitHub Actions (Manual Trigger)
 
-## 🤝 Acknowledgments
+You can run tests manually via GitHub Actions:
 
-- Thanks to the Flutter community for their amazing resources and support.
-- Special thanks to all contributors who help make this project better!
+1. First, add your OpenAI API key to GitHub Secrets:
+   - Go to your repository Settings
+   - Navigate to Secrets and Variables > Actions
+   - Click "New repository secret"
+   - Name: `OPENAI_API_KEY`
+   - Value: Your OpenAI API key
+
+2. Run the tests:
+   - Go to the "Actions" tab
+   - Select "Test Structured Output" from the workflows list
+   - Click "Run workflow"
+   - Optionally modify the Flutter version (defaults to 3.24.4)
+   - Click "Run workflow" to start the tests
+
+> **Note**: Your API key is securely stored in GitHub Secrets and is never exposed in logs or to unauthorized users.
 
 ---
 
