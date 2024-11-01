@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:io';
+import 'package:cashflow_ai/core/permissions/permission_handler.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart';
 import 'package:sembast/sembast.dart';
@@ -64,8 +65,29 @@ class DatabaseService {
 
   static Future<Directory> _getAppDirectory() async {
     try {
-      final Directory documentsDir = await getApplicationDocumentsDirectory();
-      final Directory appDir = Directory('${documentsDir.path}/$_appFolderName');
+      final hasPermission = await PermissionHandler.checkStoragePermission();
+      if (!hasPermission) {
+        throw const app_exceptions.StoragePermissionDeniedException();
+      }
+
+      Directory? baseDir;
+      if (Platform.isAndroid) {
+        if (await PermissionHandler.isAndroid11OrHigher()) {
+          // For Android 11+, use the root of external storage
+          baseDir = Directory('/storage/emulated/0');
+        } else {
+          // For older Android versions, use app-specific directory
+          baseDir = await getExternalStorageDirectory();
+        }
+      } else {
+        baseDir = await getApplicationDocumentsDirectory();
+      }
+
+      if (baseDir == null) {
+        throw app_exceptions.DatabaseException('Failed to get storage directory');
+      }
+
+      final Directory appDir = Directory('${baseDir.path}/$_appFolderName');
 
       if (!await appDir.exists()) {
         await appDir.create(recursive: true);

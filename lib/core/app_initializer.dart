@@ -21,13 +21,13 @@ class AppInitializer extends _$AppInitializer {
       _initializeGetIt();
 
       // Check SMS permission
-      final hasPermission = await PermissionHandler.checkSmsPermission();
-      if (!hasPermission) {
-        throw const PermissionDeniedException();
+      final hasSmsPermission = await PermissionHandler.checkSmsPermission();
+      if (!hasSmsPermission) {
+        throw const PermissionDeniedException('SMS permission required');
       }
 
-      // Check and request storage permissions
-      final hasStoragePermission = await DatabaseService.checkAndRequestPermissions();
+      // Check storage permission
+      final hasStoragePermission = await PermissionHandler.checkStoragePermission();
       if (!hasStoragePermission) {
         throw const StoragePermissionDeniedException();
       }
