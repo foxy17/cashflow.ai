@@ -151,6 +151,25 @@ class ReportTabRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
+/// [StoragePermissionScreen]
+class StoragePermissionRoute extends PageRouteInfo<void> {
+  const StoragePermissionRoute({List<PageRouteInfo>? children})
+      : super(
+          StoragePermissionRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'StoragePermissionRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const StoragePermissionScreen();
+    },
+  );
+}
+
+/// generated route for
 /// [UserTabScreen]
 class UserTabRoute extends PageRouteInfo<void> {
   const UserTabRoute({List<PageRouteInfo>? children})

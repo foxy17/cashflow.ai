@@ -84,7 +84,7 @@ class DatabaseService {
       }
 
       if (baseDir == null) {
-        throw app_exceptions.DatabaseException('Failed to get storage directory');
+        throw const app_exceptions.DatabaseException('Failed to get storage directory');
       }
 
       final Directory appDir = Directory('${baseDir.path}/$_appFolderName');
