@@ -7,6 +7,7 @@ import 'package:sembast/sembast.dart';
 import 'package:sembast/sembast_io.dart';
 import 'package:permission_handler/permission_handler.dart';
 import '../models/spending.dart';
+import '../models/processed_sms.dart';
 import '../exceptions/app_exceptions.dart' as app_exceptions;
 
 class DatabaseService {
@@ -17,6 +18,9 @@ class DatabaseService {
   
   // Store for spending records
   final _spendingStore = intMapStoreFactory.store('spending');
+
+  // Store for processed SMS records
+  final _processedSmsStore = intMapStoreFactory.store('processed_sms');
 
   // Private constructor
   DatabaseService._();
@@ -140,6 +144,40 @@ class DatabaseService {
       await _spendingStore.record(id).delete(db);
     } catch (e) {
       throw app_exceptions.DatabaseException('Failed to delete spending: $e');
+    }
+  }
+
+  // CRUD Operations for Processed SMS
+
+  Future<int> addProcessedSms(ProcessedSms sms) async {
+    try {
+      final db = await database;
+      final key = await _processedSmsStore.add(db, sms.toMap());
+      return key;
+    } catch (e) {
+      throw app_exceptions.DatabaseException('Failed to add processed SMS: $e');
+    }
+  }
+
+  Future<bool> isSmsProcessed(String smsId) async {
+    try {
+      final db = await database;
+      final finder = Finder(filter: Filter.equals('smsId', smsId));
+      final record = await _processedSmsStore.findFirst(db, finder: finder);
+      return record != null;
+    } catch (e) {
+      throw app_exceptions.DatabaseException('Failed to check processed SMS: $e');
+    }
+  }
+
+  // Fetch all processed SMS
+  Future<List<ProcessedSms>> getAllProcessedSms() async {
+    try {
+      final db = await database;
+      final records = await _processedSmsStore.find(db);
+      return records.map((record) => ProcessedSms.fromMap(record.value)).toList();
+    } catch (e) {
+      throw app_exceptions.DatabaseException('Failed to get processed SMS: $e');
     }
   }
 
