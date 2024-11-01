@@ -24,15 +24,20 @@ class AppRouter extends RootStackRouter {
       ],
     ),
     AutoRoute(page: PermissionDeniedRoute.page),
+    AutoRoute(page: StoragePermissionRoute.page),
   ];
 }
 
 class PermissionGuard extends AutoRouteGuard {
   @override
   void onNavigation(NavigationResolver resolver, StackRouter router) async {
-    final hasPermission = await PermissionHandler.checkSmsPermission();
-    if (!hasPermission) {
+    final hasSmsPermission = await PermissionHandler.checkSmsPermission();
+    final hasStoragePermission = await PermissionHandler.checkStoragePermission();
+
+    if (!hasSmsPermission) {
       router.push(const PermissionDeniedRoute());
+    } else if (!hasStoragePermission) {
+      router.push(const StoragePermissionRoute());
     } else {
       resolver.next(true);
     }

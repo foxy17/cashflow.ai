@@ -1,21 +1,22 @@
+import 'dart:io';
+
 import 'package:auto_route/auto_route.dart';
 import 'package:cashflow_ai/core/permissions/permission_handler.dart';
 import 'package:cashflow_ai/shared/shared.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:ionicons/ionicons.dart';
 
 @RoutePage()
-class PermissionDeniedScreen extends StatefulWidget {
-  const PermissionDeniedScreen({super.key});
+class StoragePermissionScreen extends StatefulWidget {
+  const StoragePermissionScreen({super.key});
 
   @override
-  State<PermissionDeniedScreen> createState() => _PermissionDeniedScreenState();
+  State<StoragePermissionScreen> createState() => _StoragePermissionScreenState();
 }
 
-class _PermissionDeniedScreenState extends State<PermissionDeniedScreen>
+class _StoragePermissionScreenState extends State<StoragePermissionScreen>
     with WidgetsBindingObserver {
   @override
   void initState() {
@@ -37,16 +38,20 @@ class _PermissionDeniedScreenState extends State<PermissionDeniedScreen>
   }
 
   Future<void> _checkAndNavigateIfPermissionGranted() async {
-    final bool hasPermission = await PermissionHandler.checkSmsPermission();
+    final bool hasPermission = await PermissionHandler.checkStoragePermission();
     if (hasPermission && mounted) {
-      Navigator.of(context).pushReplacementNamed('/home');
+      context.router.replaceNamed('/home');
     }
   }
+
+  String get _permissionMessage => Platform.isAndroid 
+    ? 'This app requires storage permission to store your data. On newer Android versions, you\'ll need to grant "All files access" permission for the app to work properly.'
+    : 'This app requires storage permission to store your data securely.';
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Permission Required')),
+      appBar: AppBar(title: const Text('Storage Permission Required')),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 12.w),
         child: Center(
@@ -54,7 +59,7 @@ class _PermissionDeniedScreenState extends State<PermissionDeniedScreen>
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                'This app requires SMS permission to read old SMS and incoming SMS to track your spending effectively.',
+                _permissionMessage,
                 textAlign: TextAlign.center,
                 style: context.textTheme.bodyLarge.copyWith(
                   fontSize: 18.sp,
@@ -66,7 +71,7 @@ class _PermissionDeniedScreenState extends State<PermissionDeniedScreen>
               Column(
                 children: [
                   SizedBox(
-                    width: 300.w,
+                    width: double.infinity,
                     child: ElevatedButton.icon(
                       onPressed: () => openAppSettings(),
                       style: ElevatedButton.styleFrom(
@@ -92,7 +97,7 @@ class _PermissionDeniedScreenState extends State<PermissionDeniedScreen>
                   ),
                   25.sbh,
                   SizedBox(
-                    width: 300.w,
+                    width: double.infinity,
                     child: ElevatedButton.icon(
                       onPressed: () => requestPermission(),
                       style: ElevatedButton.styleFrom(
@@ -126,11 +131,9 @@ class _PermissionDeniedScreenState extends State<PermissionDeniedScreen>
   }
 
   Future<void> requestPermission() async {
-    final isGranted = await PermissionHandler.requestSmsPermission();
-    if (isGranted) {
-      // Handle the case when permission is granted
-    } else {
-      // Handle the case when permission is denied
+    final isGranted = await PermissionHandler.requestStoragePermission();
+    if (isGranted && mounted) {
+      context.router.replaceNamed('/home');
     }
   }
-}
+} 
