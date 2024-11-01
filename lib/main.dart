@@ -15,7 +15,7 @@ backgroundMessageHandler(SmsMessage message) async {
   print("SMS Received in background!");
   print("From: ${message.address}");
   print("Message: ${message.body}");
-  
+
   // Perform any background tasks
   // Note: Avoid heavy computations here as Android may kill long-running background operations
 }
@@ -23,7 +23,7 @@ backgroundMessageHandler(SmsMessage message) async {
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   final appRouter = AppRouter();
-  
+
   runApp(
     ProviderScope(
       child: MyApp(appRouter: appRouter),
