@@ -13,6 +13,7 @@ class Spending with _$Spending {
     required PaymentType type,
     required double amount,
     required String vendor,
+    required String address,
     bool? paidForAnother,
     bool? paidBack,
   }) = _Spending;
@@ -29,6 +30,7 @@ class Spending with _$Spending {
       'type': map['type'] as String,
       'amount': map['amount'] as double,
       'vendor': map['vendor'] as String,
+      'address': map['address'] as String,
       'paidForAnother': map['paidForAnother'] as bool?,
       'paidBack': map['paidBack'] as bool?,
     });
@@ -46,6 +48,7 @@ extension SpendingX on Spending {
       'type': type.name,
       'amount': amount,
       'vendor': vendor,
+      'address': address,
       'paidForAnother': paidForAnother,
       'paidBack': paidBack,
     };

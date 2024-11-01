@@ -26,6 +26,7 @@ mixin _$Spending {
   PaymentType get type => throw _privateConstructorUsedError;
   double get amount => throw _privateConstructorUsedError;
   String get vendor => throw _privateConstructorUsedError;
+  String get address => throw _privateConstructorUsedError;
   bool? get paidForAnother => throw _privateConstructorUsedError;
   bool? get paidBack => throw _privateConstructorUsedError;
 
@@ -51,6 +52,7 @@ abstract class $SpendingCopyWith<$Res> {
       PaymentType type,
       double amount,
       String vendor,
+      String address,
       bool? paidForAnother,
       bool? paidBack});
 }
@@ -76,6 +78,7 @@ class _$SpendingCopyWithImpl<$Res, $Val extends Spending>
     Object? type = null,
     Object? amount = null,
     Object? vendor = null,
+    Object? address = null,
     Object? paidForAnother = freezed,
     Object? paidBack = freezed,
   }) {
@@ -104,6 +107,10 @@ class _$SpendingCopyWithImpl<$Res, $Val extends Spending>
           ? _value.vendor
           : vendor // ignore: cast_nullable_to_non_nullable
               as String,
+      address: null == address
+          ? _value.address
+          : address // ignore: cast_nullable_to_non_nullable
+              as String,
       paidForAnother: freezed == paidForAnother
           ? _value.paidForAnother
           : paidForAnother // ignore: cast_nullable_to_non_nullable
@@ -131,6 +138,7 @@ abstract class _$$SpendingImplCopyWith<$Res>
       PaymentType type,
       double amount,
       String vendor,
+      String address,
       bool? paidForAnother,
       bool? paidBack});
 }
@@ -154,6 +162,7 @@ class __$$SpendingImplCopyWithImpl<$Res>
     Object? type = null,
     Object? amount = null,
     Object? vendor = null,
+    Object? address = null,
     Object? paidForAnother = freezed,
     Object? paidBack = freezed,
   }) {
@@ -182,6 +191,10 @@ class __$$SpendingImplCopyWithImpl<$Res>
           ? _value.vendor
           : vendor // ignore: cast_nullable_to_non_nullable
               as String,
+      address: null == address
+          ? _value.address
+          : address // ignore: cast_nullable_to_non_nullable
+              as String,
       paidForAnother: freezed == paidForAnother
           ? _value.paidForAnother
           : paidForAnother // ignore: cast_nullable_to_non_nullable
@@ -204,6 +217,7 @@ class _$SpendingImpl implements _Spending {
       required this.type,
       required this.amount,
       required this.vendor,
+      required this.address,
       this.paidForAnother,
       this.paidBack});
 
@@ -223,13 +237,15 @@ class _$SpendingImpl implements _Spending {
   @override
   final String vendor;
   @override
+  final String address;
+  @override
   final bool? paidForAnother;
   @override
   final bool? paidBack;
 
   @override
   String toString() {
-    return 'Spending(id: $id, date: $date, category: $category, type: $type, amount: $amount, vendor: $vendor, paidForAnother: $paidForAnother, paidBack: $paidBack)';
+    return 'Spending(id: $id, date: $date, category: $category, type: $type, amount: $amount, vendor: $vendor, address: $address, paidForAnother: $paidForAnother, paidBack: $paidBack)';
   }
 
   @override
@@ -244,6 +260,7 @@ class _$SpendingImpl implements _Spending {
             (identical(other.type, type) || other.type == type) &&
             (identical(other.amount, amount) || other.amount == amount) &&
             (identical(other.vendor, vendor) || other.vendor == vendor) &&
+            (identical(other.address, address) || other.address == address) &&
             (identical(other.paidForAnother, paidForAnother) ||
                 other.paidForAnother == paidForAnother) &&
             (identical(other.paidBack, paidBack) ||
@@ -253,7 +270,7 @@ class _$SpendingImpl implements _Spending {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, id, date, category, type, amount,
-      vendor, paidForAnother, paidBack);
+      vendor, address, paidForAnother, paidBack);
 
   /// Create a copy of Spending
   /// with the given fields replaced by the non-null parameter values.
@@ -279,6 +296,7 @@ abstract class _Spending implements Spending {
       required final PaymentType type,
       required final double amount,
       required final String vendor,
+      required final String address,
       final bool? paidForAnother,
       final bool? paidBack}) = _$SpendingImpl;
 
@@ -297,6 +315,8 @@ abstract class _Spending implements Spending {
   double get amount;
   @override
   String get vendor;
+  @override
+  String get address;
   @override
   bool? get paidForAnother;
   @override

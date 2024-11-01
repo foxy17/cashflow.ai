@@ -14,6 +14,7 @@ _$SpendingImpl _$$SpendingImplFromJson(Map<String, dynamic> json) =>
       type: $enumDecode(_$PaymentTypeEnumMap, json['type']),
       amount: (json['amount'] as num).toDouble(),
       vendor: json['vendor'] as String,
+      address: json['address'] as String,
       paidForAnother: json['paidForAnother'] as bool?,
       paidBack: json['paidBack'] as bool?,
     );
@@ -26,6 +27,7 @@ Map<String, dynamic> _$$SpendingImplToJson(_$SpendingImpl instance) =>
       'type': _$PaymentTypeEnumMap[instance.type]!,
       'amount': instance.amount,
       'vendor': instance.vendor,
+      'address': instance.address,
       'paidForAnother': instance.paidForAnother,
       'paidBack': instance.paidBack,
     };
