@@ -1,3 +1,4 @@
+import 'package:another_telephony/telephony.dart';
 import 'package:cashflow_ai/core/app_bootstrapper.dart';
 import 'package:cashflow_ai/shared/shared.dart';
 import 'package:flutter/material.dart';
@@ -7,6 +8,17 @@ import 'shared/theme/theme_provider.dart';
 import 'shared/theme/app_text_theme.dart';
 import 'core/theme/theme_factory.dart';
 import 'router/app_router.dart';
+
+@pragma('vm:entry-point')
+backgroundMessageHandler(SmsMessage message) async {
+  // Handle background message
+  print("SMS Received in background!");
+  print("From: ${message.address}");
+  print("Message: ${message.body}");
+  
+  // Perform any background tasks
+  // Note: Avoid heavy computations here as Android may kill long-running background operations
+}
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
