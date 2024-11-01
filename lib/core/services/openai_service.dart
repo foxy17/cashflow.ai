@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:openai_dart/openai_dart.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -40,12 +41,14 @@ class OpenAIService {
   Future<Map<String, dynamic>> generateStructuredResponse(
     String userMessage,
     String systemMessage,
-    Map<String, dynamic> schema, {
-    String? schemaName,
-    String? schemaDescription,
-    ChatCompletionModel? model,
-    double temperature = 0,
-  }) async {
+    Map<String, dynamic> schema,
+    {
+      String? schemaName,
+      String? schemaDescription,
+      ChatCompletionModel? model,
+      double temperature = 0,
+    }
+  ) async {
     final response = await client.createChatCompletion(
       request: CreateChatCompletionRequest(
         model: model ?? _defaultModel,
@@ -79,6 +82,6 @@ class OpenAIService {
 }
 
 @riverpod
-OpenAIService openAIService(OpenAIServiceRef ref) {
+OpenAIService openAIService(Ref ref) {
   return OpenAIService();
 } 

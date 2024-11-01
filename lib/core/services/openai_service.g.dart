@@ -6,7 +6,7 @@ part of 'openai_service.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$openAIServiceHash() => r'7bdef9bab8f392f179e92cf8a8ec100a27a25d57';
+String _$openAIServiceHash() => r'4283e0a6609b02cf5d2b20f11ef95572a55cd202';
 
 /// See also [openAIService].
 @ProviderFor(openAIService)

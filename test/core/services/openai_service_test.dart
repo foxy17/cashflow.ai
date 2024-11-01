@@ -3,6 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:cashflow_ai/core/services/openai_service.dart';
 import '../../test_utils/mock_data/payment_messages.dart';
 import '../../test_utils/load_env.dart';
+import 'package:cashflow_ai/core/constants/structured_response_schema.dart';
 
 void main() {
   late OpenAIService openAIService;
@@ -32,56 +33,7 @@ void main() {
         return;
       }
 
-      final schema = {
-        'type': 'object',
-        'properties': {
-          'transactions': {
-            'type': 'array',
-            'items': {
-              'type': 'object',
-              'properties': {
-                'date': {
-                  'type': 'string',
-                  'description': 'Transaction date in YYYY-MM-DD format',
-                },
-                'amount': {
-                  'type': 'number',
-                  'description': 'Transaction amount in INR',
-                },
-                'category': {
-                  'type': 'string',
-                  'enum': [
-                    'food_and_beverages',
-                    'shopping',
-                    'entertainment',
-                    'travel',
-                    'utilities',
-                    'others'
-                  ],
-                  'description': 'Category based on merchant name',
-                },
-                'paymentMode': {
-                  'type': 'string',
-                  'enum': ['UPI', 'CREDIT_CARD', 'DEBIT_CARD'],
-                  'description': 'Mode of payment used',
-                },
-                'merchantName': {
-                  'type': 'string',
-                  'description': 'Name of the merchant',
-                },
-              },
-              'required': [
-                'date',
-                'amount',
-                'category',
-                'paymentMode',
-                'merchantName'
-              ],
-            },
-          },
-        },
-        'required': ['transactions'],
-      };
+      final schema = structuredResponseSchema;
 
       final messages = PaymentMessages.sampleMessages.join('\n');
       
