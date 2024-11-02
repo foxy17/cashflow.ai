@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:cashflow_ai/core/models/user_profile.dart';
+import 'package:cashflow_ai/core/models/models.dart';
 
 class UserPreferences {
   static const String _keyUserProfile = 'user_profile';

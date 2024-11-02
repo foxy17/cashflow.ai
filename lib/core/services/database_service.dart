@@ -6,8 +6,7 @@ import 'package:path/path.dart';
 import 'package:sembast/sembast.dart';
 import 'package:sembast/sembast_io.dart';
 import 'package:permission_handler/permission_handler.dart';
-import '../models/spending.dart';
-import '../models/processed_sms.dart';
+import 'package:cashflow_ai/core/models/models.dart';
 import '../exceptions/app_exceptions.dart' as app_exceptions;
 
 class DatabaseService {

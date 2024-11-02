@@ -4,8 +4,7 @@ import 'package:cashflow_ai/core/services/database_service.dart';
 import 'package:cashflow_ai/core/services/openai_service.dart';
 import 'package:cashflow_ai/core/constants/structured_response_schema.dart';
 import 'package:cashflow_ai/core/constants/currency_keywords.dart';
-import '../models/spending.dart';
-import '../models/processed_sms.dart';
+import 'package:cashflow_ai/core/models/models.dart';
 
 class SmsProcessingService {
   final Telephony telephony;

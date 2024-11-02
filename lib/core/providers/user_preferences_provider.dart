@@ -1,7 +1,7 @@
 import 'package:get_it/get_it.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../models/user_profile.dart';
+import 'package:cashflow_ai/core/models/models.dart';
 import '../services/user_preferences.dart';
 
 part 'user_preferences_provider.g.dart';
