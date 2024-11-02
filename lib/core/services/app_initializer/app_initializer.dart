@@ -3,9 +3,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get_it/get_it.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'permissions/permission_handler.dart';
-import 'services/database_service.dart';
-import 'exceptions/app_exceptions.dart';
+import '../../permissions/permission_handler.dart';
+import '../database_service.dart';
+import '../../exceptions/app_exceptions.dart';
 
 part 'app_initializer.g.dart';
 final getIt = GetIt.instance;

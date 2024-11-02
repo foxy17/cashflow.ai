@@ -1,6 +1,6 @@
 import 'dart:io';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:cashflow_ai/core/services/openai_service.dart';
+import 'package:cashflow_ai/core/services/ai/openai_service.dart';
 import '../../test_utils/mock_data/payment_messages.dart';
 import '../../test_utils/load_env.dart';
 import 'package:cashflow_ai/core/constants/structured_response_schema.dart';

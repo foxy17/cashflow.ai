@@ -1,7 +1,7 @@
 import 'package:another_telephony/telephony.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:cashflow_ai/core/services/database_service.dart';
-import 'package:cashflow_ai/core/services/openai_service.dart';
+import 'package:cashflow_ai/core/services/ai/openai_service.dart';
 import 'package:cashflow_ai/core/constants/structured_response_schema.dart';
 import 'package:cashflow_ai/core/constants/currency_keywords.dart';
 import 'package:cashflow_ai/core/models/models.dart';

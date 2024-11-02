@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../router/app_router.dart';
+import '../../../router/app_router.dart';
 import 'app_initializer.dart';
 
 class AppBootstrapper extends ConsumerWidget {

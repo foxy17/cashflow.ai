@@ -1,5 +1,5 @@
 import 'package:another_telephony/telephony.dart';
-import 'package:cashflow_ai/core/app_bootstrapper.dart';
+import 'package:cashflow_ai/core/services/app_initializer/app_bootstrapper.dart';
 import 'package:cashflow_ai/shared/shared.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

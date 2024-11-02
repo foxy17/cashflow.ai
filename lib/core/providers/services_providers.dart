@@ -1,5 +1,5 @@
 import 'package:cashflow_ai/core/services/database_service.dart';
-import 'package:cashflow_ai/core/services/openai_service.dart';
+import 'package:cashflow_ai/core/services/ai/openai_service.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:cashflow_ai/core/services/sms_processing_service.dart';
 import 'package:another_telephony/telephony.dart';

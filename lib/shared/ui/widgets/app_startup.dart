@@ -1,4 +1,4 @@
-import 'package:cashflow_ai/core/app_initializer.dart';
+import 'package:cashflow_ai/core/services/app_initializer/app_initializer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../core/permissions/permission_handler.dart';
