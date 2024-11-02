@@ -12,9 +12,9 @@ import 'router/app_router.dart';
 @pragma('vm:entry-point')
 backgroundMessageHandler(SmsMessage message) async {
   // Handle background message
-  print("SMS Received in background!");
-  print("From: ${message.address}");
-  print("Message: ${message.body}");
+  print('SMS Received in background!');
+  print('From: ${message.address}');
+  print('Message: ${message.body}');
 
   // Perform any background tasks
   // Note: Avoid heavy computations here as Android may kill long-running background operations

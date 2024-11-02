@@ -3,7 +3,6 @@ import 'package:cashflow_ai/core/permissions/permission_handler.dart';
 import 'package:cashflow_ai/shared/shared.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:ionicons/ionicons.dart';
 

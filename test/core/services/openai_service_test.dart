@@ -33,7 +33,7 @@ void main() {
         return;
       }
 
-      final schema = structuredResponseSchema;
+      const schema = structuredResponseSchema;
 
       final messages = PaymentMessages.sampleMessages.join('\n');
       

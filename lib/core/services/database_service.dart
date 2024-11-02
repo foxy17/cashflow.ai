@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:cashflow_ai/core/permissions/permission_handler.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart';
-import 'package:sembast/sembast.dart';
 import 'package:sembast/sembast_io.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:cashflow_ai/core/models/models.dart';

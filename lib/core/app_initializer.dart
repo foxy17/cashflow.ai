@@ -5,7 +5,6 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'permissions/permission_handler.dart';
 import 'services/database_service.dart';
-import 'services/user_preferences.dart';
 import 'exceptions/app_exceptions.dart';
 
 part 'app_initializer.g.dart';
