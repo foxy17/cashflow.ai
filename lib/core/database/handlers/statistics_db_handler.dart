@@ -1,5 +1,5 @@
 import 'package:sembast/sembast.dart';
-import '../../models/spend_statistics.dart';
+import 'package:cashflow_ai/core/models/models.dart';
 import 'base_db_handler.dart';
 
 class StatisticsDbHandler extends BaseDbHandler<SpendStatistics> {

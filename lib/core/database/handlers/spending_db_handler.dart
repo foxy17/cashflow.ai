@@ -1,5 +1,5 @@
 import 'package:sembast/sembast.dart';
-import '../../models/spending.dart';
+import 'package:cashflow_ai/core/models/models.dart';
 import 'base_db_handler.dart';
 
 class SpendingDbHandler extends BaseDbHandler<Spending> {
