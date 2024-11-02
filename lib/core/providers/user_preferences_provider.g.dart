@@ -1,26 +1,27 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'app_initializer.dart';
+part of 'user_preferences_provider.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$appInitializerHash() => r'7e4dd58a40ad3002fa05c1d0e139df2006c96d80';
+String _$userPreferencesNotifierHash() =>
+    r'6c20ef0c025dcb789b958800485056dcc0ea9232';
 
-/// See also [AppInitializer].
-@ProviderFor(AppInitializer)
-final appInitializerProvider =
-    AutoDisposeAsyncNotifierProvider<AppInitializer, void>.internal(
-  AppInitializer.new,
-  name: r'appInitializerProvider',
+/// See also [UserPreferencesNotifier].
+@ProviderFor(UserPreferencesNotifier)
+final userPreferencesNotifierProvider =
+    NotifierProvider<UserPreferencesNotifier, UserProfile?>.internal(
+  UserPreferencesNotifier.new,
+  name: r'userPreferencesNotifierProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
-      : _$appInitializerHash,
+      : _$userPreferencesNotifierHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef _$AppInitializer = AutoDisposeAsyncNotifier<void>;
+typedef _$UserPreferencesNotifier = Notifier<UserProfile?>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

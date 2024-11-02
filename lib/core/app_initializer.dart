@@ -1,8 +1,11 @@
+import 'package:cashflow_ai/core/providers/user_preferences_provider.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get_it/get_it.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'permissions/permission_handler.dart';
 import 'services/database_service.dart';
+import 'services/user_preferences.dart';
 import 'exceptions/app_exceptions.dart';
 
 part 'app_initializer.g.dart';
@@ -18,7 +21,10 @@ class AppInitializer extends _$AppInitializer {
       await ScreenUtil.ensureScreenSize();
 
       // Initialize GetIt dependencies
-      _initializeGetIt();
+      await _initializeGetIt();
+
+      // Initialize UserPreferences provider
+      ref.read(userPreferencesNotifierProvider);
 
       // Check SMS permission
       final hasSmsPermission = await PermissionHandler.checkSmsPermission();
@@ -39,7 +45,10 @@ class AppInitializer extends _$AppInitializer {
     }
   }
 
-  void _initializeGetIt() {
-    // Add your GetIt registrations here
+  Future<void> _initializeGetIt() async {
+    // Initialize SharedPreferences
+    final prefs = await SharedPreferences.getInstance();
+    // Register SharedPreferences as singleton
+    getIt.registerSingleton<SharedPreferences>(prefs);
   }
 }
