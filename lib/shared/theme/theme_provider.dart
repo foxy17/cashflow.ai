@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'app_theme_data.dart';
 import 'app_colors.dart';
 import 'app_text_theme.dart';
-import '../../core/theme/theme_factory.dart';
+import 'theme_factory.dart';
 
 class AppTheme extends ChangeNotifier {
   final AppThemeDataFactory themeFactory;

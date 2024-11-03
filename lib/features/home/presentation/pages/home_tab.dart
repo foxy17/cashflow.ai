@@ -1,6 +1,8 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:cashflow_ai/shared/shared.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import '../widgets/widgets.dart';
 
 @RoutePage()
 class HomeTabScreen extends StatelessWidget {
@@ -10,11 +12,25 @@ class HomeTabScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Home', style: TextStyle(color: context.colors.black))),
-      body: Center(
-        child: Text(
-          'Welcome to the Home tab!',
-          style: TextStyle(color: context.colors.gunMetal),
+      backgroundColor: context.colorScheme.surface,
+      body: SafeArea(
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 16.w),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              16.sbh,
+              const HomeHeader(),
+              24.sbh,
+              const MonthlyBalanceCard(),
+              24.sbh,
+              const BuddyPlannerCard(),
+              24.sbh,
+              const CategorySlider(),
+              24.sbh,
+              const StatisticsSection(),
+            ],
+          ),
         ),
       ),
     );

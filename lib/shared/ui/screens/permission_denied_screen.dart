@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:cashflow_ai/core/permissions/permission_handler.dart';
+import 'package:cashflow_ai/router/app_router.dart';
 import 'package:cashflow_ai/shared/shared.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -38,7 +39,7 @@ class _PermissionDeniedScreenState extends State<PermissionDeniedScreen>
   Future<void> _checkAndNavigateIfPermissionGranted() async {
     final bool hasPermission = await PermissionHandler.checkSmsPermission();
     if (hasPermission && mounted) {
-      Navigator.of(context).pushReplacementNamed('/home');
+      context.router.replace(const MainRoute());
     }
   }
 
@@ -126,10 +127,8 @@ class _PermissionDeniedScreenState extends State<PermissionDeniedScreen>
 
   Future<void> requestPermission() async {
     final isGranted = await PermissionHandler.requestSmsPermission();
-    if (isGranted) {
-      // Handle the case when permission is granted
-    } else {
-      // Handle the case when permission is denied
+    if (isGranted && mounted) {
+      context.router.replace(const MainRoute());
     }
   }
 }

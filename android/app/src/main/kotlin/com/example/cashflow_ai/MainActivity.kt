@@ -1,4 +1,4 @@
-package com.example.cashflow_ai
+package com.cashflow_ai
 
 import io.flutter.embedding.android.FlutterActivity
 

@@ -39,7 +39,12 @@ class AppInitializer extends _$AppInitializer {
 
       // Initialize database
       await DatabaseService.instance.database;
+    } on PermissionDeniedException catch (e) {
+      rethrow;  // Re-throw permission exceptions as-is
+    } on StoragePermissionDeniedException catch (e) {
+      rethrow;  // Re-throw storage permission exceptions as-is
     } catch (e) {
+      // Wrap other exceptions in InitializationException
       throw InitializationException('Failed to initialize app: $e');
     }
   }

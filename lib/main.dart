@@ -6,7 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'shared/theme/theme_provider.dart';
 import 'shared/theme/app_text_theme.dart';
-import 'core/theme/theme_factory.dart';
+import 'shared/theme/theme_factory.dart';
 import 'router/app_router.dart';
 
 @pragma('vm:entry-point')
@@ -65,6 +65,7 @@ class MyApp extends StatelessWidget {
                     brightness: Brightness.dark,
                   ),
                   themeMode: context.themeMode,
+                  debugShowCheckedModeBanner: false,
                 ),
               );
             },

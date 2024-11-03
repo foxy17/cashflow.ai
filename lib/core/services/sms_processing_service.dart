@@ -17,15 +17,16 @@ class SmsProcessingService {
     required this.aiService,
   });
 
-  Future<void> processSmsMessages() async {
-    final result = await _fetchAndProcessSms().run();
-    result.fold(
+  Future<List<Spending>> processSmsMessages() async {
+    final spendingsResult = await _fetchAndProcessSms().run();
+    spendingsResult.fold(
       (failure) => print('Error processing SMS: $failure'),
-      (_) => print('SMS processing completed successfully'),
+      (spendings) => print('SMS processing completed successfully: $spendings'),
     );
+    return spendingsResult.getOrElse((error) => <Spending>[]);
   }
 
-  TaskEither<String, void> _fetchAndProcessSms() {
+  TaskEither<String, List<Spending>> _fetchAndProcessSms() {
     return TaskEither.tryCatch(
       () async {
         // Build filter dynamically from all financial keywords
@@ -69,6 +70,9 @@ class SmsProcessingService {
         }
         
 
+        // List to hold spendings
+        List<Spending> spendingsList = [];
+
         // Send to AI service and store results
         for (var msg in newMessages) {
           final structuredData = await aiService.generateStructuredResponse(
@@ -94,6 +98,7 @@ class SmsProcessingService {
           // Store spendings
           for (var spending in spendings) {
             await databaseService.addSpending(spending);
+            spendingsList.add(spending); // Add to the list
           }
 
           // Mark SMS as processed
@@ -103,6 +108,8 @@ class SmsProcessingService {
           );
           await databaseService.addProcessedSms(processedSms);
         }
+
+        return spendingsList; // Return the list of spendings
       },
       (error, stackTrace) => error.toString(),
     );

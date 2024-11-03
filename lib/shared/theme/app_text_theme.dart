@@ -8,6 +8,7 @@ class AppTextTheme {
   final TextStyle bodyLarge;
   final TextStyle bodyMedium;
   final TextStyle labelLarge;
+  final TextStyle titleLarge;
 
   const AppTextTheme({
     required this.displayLarge,
@@ -15,10 +16,15 @@ class AppTextTheme {
     required this.bodyLarge,
     required this.bodyMedium,
     required this.labelLarge,
+    required this.titleLarge,
   });
 
   static AppTextTheme build() {
     return AppTextTheme(
+      titleLarge: GoogleFonts.inter(
+        fontSize: 24.sp,
+        fontWeight: FontWeight.bold,
+      ),
       displayLarge: GoogleFonts.inter(
         fontSize: 24.sp,
         fontWeight: FontWeight.bold,

@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:auto_route/auto_route.dart';
 import 'package:cashflow_ai/core/permissions/permission_handler.dart';
+import 'package:cashflow_ai/router/app_router.dart';
 import 'package:cashflow_ai/shared/shared.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -40,7 +41,7 @@ class _StoragePermissionScreenState extends State<StoragePermissionScreen>
   Future<void> _checkAndNavigateIfPermissionGranted() async {
     final bool hasPermission = await PermissionHandler.checkStoragePermission();
     if (hasPermission && mounted) {
-      context.router.replaceNamed('/home');
+      context.router.replace(const MainRoute());
     }
   }
 
@@ -133,7 +134,7 @@ class _StoragePermissionScreenState extends State<StoragePermissionScreen>
   Future<void> requestPermission() async {
     final isGranted = await PermissionHandler.requestStoragePermission();
     if (isGranted && mounted) {
-      context.router.replaceNamed('/home');
+      context.router.replace(const MainRoute());
     }
   }
 } 

@@ -18,9 +18,9 @@ class AppRouter extends RootStackRouter {
       page: MainRoute.page,
       guards: [PermissionGuard()],
       children: [
-        AutoRoute(page: HomeTabRoute.page, initial: true),
-        AutoRoute(page: ReportTabRoute.page),
-        AutoRoute(page: UserTabRoute.page),
+        AutoRoute(page: HomeTabRoute.page, initial: true, path: 'home'),
+        AutoRoute(page: ReportTabRoute.page, path: 'report'),
+        AutoRoute(page: UserTabRoute.page, path: 'user'),
       ],
     ),
     AutoRoute(page: PermissionDeniedRoute.page),
