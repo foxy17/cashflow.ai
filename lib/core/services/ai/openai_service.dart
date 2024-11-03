@@ -2,11 +2,12 @@ import 'dart:convert';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:openai_dart/openai_dart.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'base_ai_service.dart';
 
 part 'openai_service.g.dart';
 
 /// Service wrapper for OpenAI client that handles structured output generation
-class OpenAIService {
+class OpenAIService implements BaseAIService {
   OpenAIClient? _client;
   String? _currentApiKey;
   ChatCompletionModel _defaultModel = const ChatCompletionModel.model(
@@ -34,33 +35,30 @@ class OpenAIService {
     return _client!;
   }
 
-  /// Generates a structured response based on the provided schema
-  /// 
-  /// [userMessage], [systemMessage], and [schema] are required positional parameters
-  /// Other parameters are optional named parameters
-  Future<Map<String, dynamic>> generateStructuredResponse(
-    String userMessage,
-    String systemMessage,
-    Map<String, dynamic> schema,
-    {
-      String? schemaName,
-      String? schemaDescription,
-      ChatCompletionModel? model,
-      double temperature = 0,
-    }
-  ) async {
+  @override
+  Future<Map<String, dynamic>> generateStructuredResponse({
+    required String content,
+    required String systemMessage,
+    required Map<String, dynamic> schema,
+    String? model,
+    String? schemaName,
+    String? schemaDescription,
+    Map<String, dynamic>? additionalOptions,
+  }) async {
     final response = await client.createChatCompletion(
       request: CreateChatCompletionRequest(
-        model: model ?? _defaultModel,
+        model: model != null 
+          ? ChatCompletionModel.model(ChatCompletionModels.values.byName(model))
+          : _defaultModel,
         messages: [
           ChatCompletionMessage.system(
             content: systemMessage,
           ),
           ChatCompletionMessage.user(
-            content: ChatCompletionUserMessageContent.string(userMessage),
+            content: ChatCompletionUserMessageContent.string(content),
           ),
         ],
-        temperature: temperature,
+        temperature: additionalOptions?['temperature'] ?? 0,
         responseFormat: ResponseFormat.jsonSchema(
           jsonSchema: JsonSchemaObject(
             name: schemaName ?? 'StructuredResponse',

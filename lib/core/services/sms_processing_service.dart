@@ -1,7 +1,7 @@
 import 'package:another_telephony/telephony.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:cashflow_ai/core/services/database_service.dart';
-import 'package:cashflow_ai/core/services/ai/openai_service.dart';
+import 'package:cashflow_ai/core/services/ai/ai_service.dart';
 import 'package:cashflow_ai/core/constants/structured_response_schema.dart';
 import 'package:cashflow_ai/core/constants/currency_keywords.dart';
 import 'package:cashflow_ai/core/models/models.dart';
@@ -9,12 +9,12 @@ import 'package:cashflow_ai/core/models/models.dart';
 class SmsProcessingService {
   final Telephony telephony;
   final DatabaseService databaseService;
-  final OpenAIService openAIService;
+  final AIService aiService;
 
   SmsProcessingService({
     required this.telephony,
     required this.databaseService,
-    required this.openAIService,
+    required this.aiService,
   });
 
   Future<void> processSmsMessages() async {
@@ -55,13 +55,9 @@ class SmsProcessingService {
         List<Spending> existingSpendings = await databaseService.getAllSpendings();
 
         // Filter out already processed SMS
-        List<SmsMessage> newMessages = allMessages.where((msg) {
-          // Check if SMS ID is already processed
-          if (processedSmsList.isNotEmpty) {
-            return !processedSmsList.any((processed) => processed.smsId == msg.id.toString());
-          }
-          return true;
-        }).toList();
+        List<SmsMessage> newMessages = processedSmsList.isNotEmpty
+            ? allMessages.where((msg) => !processedSmsList.any((processed) => processed.smsId == msg.id.toString())).toList()
+            : allMessages;
 
         // Further filter if spendings exist
         if (existingSpendings.isNotEmpty) {
@@ -71,15 +67,19 @@ class SmsProcessingService {
                 spending.date.isAtSameMomentAs(DateTime.fromMillisecondsSinceEpoch(msg.date!)));
           }).toList();
         }
+        
 
-        // Send to OpenAI and store results
+        // Send to AI service and store results
         for (var msg in newMessages) {
-          final structuredData = await openAIService.generateStructuredResponse(
-            msg.body!,
-            'You are a financial transaction analyzer. Extract transaction details from the given messages.',
-            structuredResponseSchema,
+          final structuredData = await aiService.generateStructuredResponse(
+            content: msg.body!,
+            systemMessage: 'You are a financial transaction analyzer. Extract transaction details from the given messages.',
+            schema: structuredResponseSchema,
             schemaName: 'TransactionAnalysis',
             schemaDescription: 'Analyzes multiple bank transaction messages to extract structured data',
+            additionalOptions: {
+              'temperature': 0,
+            },
           );
 
           // Convert structured data to Spending objects
