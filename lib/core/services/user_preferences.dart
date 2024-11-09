@@ -3,34 +3,43 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:cashflow_ai/core/models/models.dart';
 
 class UserPreferences {
-  static const String _keyUserProfile = 'user_profile';
+  static const String _profileKey = 'user_profile';
+  static const String _defaultAvatar = 'Avatar-1.svg';
+  
   final SharedPreferences _prefs;
 
   UserPreferences(this._prefs);
 
-  Future<void> saveUserProfile(UserProfile profile) async {
-    await _prefs.setString(_keyUserProfile, jsonEncode(profile.toJson()));
-  }
-
   UserProfile? getUserProfile() {
-    final String? userStr = _prefs.getString(_keyUserProfile);
-    if (userStr == null) return null;
-    return UserProfile.fromJson(jsonDecode(userStr));
+    final profileJson = _prefs.getString(_profileKey);
+    if (profileJson == null) return null;
+    
+    try {
+      return UserProfile.fromJson(
+        json.decode(profileJson) as Map<String, dynamic>,
+      );
+    } catch (e) {
+      return null;
+    }
   }
 
-  Future<void> updateMonthlySpending(double amount) async {
+  Future<void> saveUserProfile(UserProfile profile) async {
+    await _prefs.setString(_profileKey, json.encode(profile.toJson()));
+  }
+
+  Future<void> updateAvatar(String avatarName) async {
     final profile = getUserProfile();
     if (profile == null) return;
 
-    await saveUserProfile(
-      profile.copyWith(
-        currentMonthSpending: amount,
-        lastUpdated: DateTime.now(),
-      ),
+    final updatedProfile = profile.copyWith(
+      profileImagePath: avatarName,
+      lastUpdated: DateTime.now(),
     );
+    
+    await saveUserProfile(updatedProfile);
   }
 
   Future<void> clear() async {
-    await _prefs.remove(_keyUserProfile);
+    await _prefs.clear();
   }
 } 
