@@ -13,6 +13,7 @@ Generate code, corrections, and refactorings that comply with the basic principl
   - Create necessary types.
 - Don't leave blank lines within a function.
 - One export per file.
+- UI components onClick and all similar handlers should only have the function name not the code.
 
 ### Nomenclature
 
