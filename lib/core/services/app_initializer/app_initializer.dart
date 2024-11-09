@@ -40,19 +40,16 @@ class AppInitializer extends _$AppInitializer {
       // Initialize database
       await DatabaseService.instance.database;
     } on PermissionDeniedException catch (e) {
-      rethrow;  // Re-throw permission exceptions as-is
+      rethrow;
     } on StoragePermissionDeniedException catch (e) {
-      rethrow;  // Re-throw storage permission exceptions as-is
+      rethrow;
     } catch (e) {
-      // Wrap other exceptions in InitializationException
       throw InitializationException('Failed to initialize app: $e');
     }
   }
 
   Future<void> _initializeGetIt() async {
-    // Initialize SharedPreferences
     final prefs = await SharedPreferences.getInstance();
-    // Register SharedPreferences as singleton
     getIt.registerSingleton<SharedPreferences>(prefs);
   }
 }
