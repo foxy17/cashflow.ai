@@ -13,7 +13,26 @@ class UserPreferencesNotifier extends _$UserPreferencesNotifier {
   @override
   UserProfile? build() {
     _preferences = UserPreferences(GetIt.instance<SharedPreferences>());
-    return _preferences.getUserProfile();
+    return _initializeProfile();
+  }
+
+  UserProfile? _initializeProfile() {
+    final existingProfile = _preferences.getUserProfile();
+    if (existingProfile != null) {
+      return existingProfile;
+    }
+
+    // Create and save default profile if none exists
+    final defaultProfile = UserProfile(
+      name: 'User',
+      monthlySpendingLimit: 1000.0,
+      currentMonthSpending: 0.0,
+      lastUpdated: DateTime.now(),
+      profileImagePath: 'Avatar-1.png',
+    );
+    
+    _preferences.saveUserProfile(defaultProfile);
+    return defaultProfile;
   }
 
   Future<void> saveProfile(UserProfile profile) async {
