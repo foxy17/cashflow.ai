@@ -58,7 +58,7 @@ class MonthlyBalanceCard extends StatelessWidget {
               child: Text(
                 'Left balance',
                 style: textTheme.titleMedium?.copyWith(
-                  color: colorScheme.onSurface.withOpacity(0.7),
+                  color: colorScheme.onSurface,
                 ),
               ),
             ),
