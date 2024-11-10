@@ -35,8 +35,21 @@ class SpendingStatusCard extends ConsumerWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
-              '${spentAmount.toCurrencyString()} of ${totalAmount.toCurrencyString()} spent',
-              style: textTheme.bodyMedium,
+              '${spentAmount.toCurrencyString()}',
+              style: textTheme.bodyMedium?.copyWith(
+                fontSize: 18.sp,
+                letterSpacing: -2.sp,
+              ),
+            ),
+            4.sbw,
+            Text(
+              'of ${totalAmount.toCurrencyString()} spent',
+              style: textTheme.bodyMedium?.copyWith(
+                color: colorScheme.onSurface.withOpacity(0.4),
+                fontSize: 18.sp,
+                letterSpacing: -2.sp,
+                wordSpacing: 4.sp,
+              ),
             ),
             8.sbw,
             if (percentageChange > 0)
