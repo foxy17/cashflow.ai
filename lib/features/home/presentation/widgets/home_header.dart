@@ -15,7 +15,7 @@ class HomeHeader extends ConsumerWidget {
       context: context,
       isScrollControlled: true,
       backgroundColor: context.colorScheme.surface,
-      shape:  RoundedRectangleBorder(
+      shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(20.w)),
       ),
       builder: (context) => SizedBox(
@@ -42,7 +42,7 @@ class HomeHeader extends ConsumerWidget {
           ),
           child: Text(
             'November',
-            style: context.textTheme.titleLarge.copyWith(
+            style: context.textTheme.bodyLarge.copyWith(
               fontWeight: FontWeight.w500,
               fontSize: 16.sp,
               color: context.colorScheme.onSurface,
@@ -73,7 +73,7 @@ class HomeHeader extends ConsumerWidget {
                 radius: 32.r,
                 backgroundColor: colorScheme.onTertiary,
                 child: Padding(
-                  padding:  EdgeInsets.all(6.w),
+                  padding: EdgeInsets.all(6.w),
                   child: Image.asset('assets/avatars/$avatarPath'),
                 ),
               ),

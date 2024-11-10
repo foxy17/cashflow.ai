@@ -79,8 +79,6 @@ class AvatarSelectionModal extends ConsumerWidget {
                     final currentProfile =
                         ref.read(userPreferencesNotifierProvider);
 
-                    print(currentProfile);
-
                     if (currentProfile != null) {
                       await notifier.saveProfile(
                         currentProfile.copyWith(profileImagePath: avatar),

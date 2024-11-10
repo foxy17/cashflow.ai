@@ -25,7 +25,7 @@ class UserPreferencesNotifier extends _$UserPreferencesNotifier {
     // Create and save default profile if none exists
     final defaultProfile = UserProfile(
       name: 'User',
-      monthlySpendingLimit: 1000.0,
+      monthlySpendingLimit: 5000.0,
       currentMonthSpending: 0.0,
       lastUpdated: DateTime.now(),
       profileImagePath: 'Avatar-1.png',

@@ -23,27 +23,21 @@ class AppTextTheme {
     return AppTextTheme(
       titleLarge: GoogleFonts.inter(
         fontSize: 24.sp,
-        fontWeight: FontWeight.bold,
       ),
       displayLarge: GoogleFonts.inter(
         fontSize: 24.sp,
-        fontWeight: FontWeight.bold,
       ),
       displayMedium: GoogleFonts.inter(
         fontSize: 20.sp,
-        fontWeight: FontWeight.w600,
       ),
       bodyLarge: GoogleFonts.inter(
         fontSize: 16.sp,
-        fontWeight: FontWeight.normal,
       ),
       bodyMedium: GoogleFonts.inter(
         fontSize: 14.sp,
-        fontWeight: FontWeight.normal,
       ),
       labelLarge: GoogleFonts.inter(
         fontSize: 16.sp,
-        fontWeight: FontWeight.w600,
       ),
     );
   }

@@ -19,10 +19,12 @@ class HomeTabScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              16.sbh,
+              12.sbh,
               const HomeHeader(),
-              24.sbh,
+              16.sbh,
               const MonthlyBalanceCard(),
+              4.sbh,
+              const SpendingStatusCard(),
               24.sbh,
               const BuddyPlannerCard(),
               24.sbh,

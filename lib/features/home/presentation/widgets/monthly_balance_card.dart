@@ -13,62 +13,58 @@ class MonthlyBalanceCard extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          'Left balance',
-          style: textTheme.titleMedium?.copyWith(
-            color: colorScheme.onSurface.withOpacity(0.7),
-          ),
-        ),
-        8.sbh,
         Row(
           crossAxisAlignment: CrossAxisAlignment.end,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(
-              '\$420',
-              style: textTheme.displayLarge?.copyWith(
-                fontWeight: FontWeight.bold,
-              ),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                Text(
+                  '₹',
+                  style: textTheme.displayLarge?.copyWith(
+                    fontWeight: FontWeight.normal,
+                    fontSize: 40.sp,
+                  ),
+                ),
+                8.sbw,
+                Text(
+                  '${10000.toFormattedString()}',
+                  style: textTheme.displayLarge?.copyWith(
+                    fontWeight: FontWeight.normal,
+                    fontSize: 40.sp,
+                    letterSpacing: -4.sp,
+                    textBaseline: TextBaseline.ideographic,
+                  ),
+                ),
+                Transform.translate(
+                  // Added Transform to adjust position
+                  offset:
+                      Offset(0, -4.w), // Adjust the vertical offset as needed
+                  child: Text(
+                    '.50',
+                    style: textTheme.titleLarge?.copyWith(
+                      color: colorScheme.onSurface.withOpacity(0.7),
+                      fontWeight: FontWeight.normal,
+                      letterSpacing: 0.sp,
+                      textBaseline: TextBaseline.alphabetic,
+                    ),
+                  ),
+                ),
+              ],
             ),
-            Text(
-              '.50',
-              style: textTheme.titleLarge?.copyWith(
-                color: colorScheme.onSurface.withOpacity(0.7),
+            Transform.translate(
+              offset: Offset(0, -4.w),
+              child: Text(
+                'Left balance',
+                style: textTheme.titleMedium?.copyWith(
+                  color: colorScheme.onSurface.withOpacity(0.7),
+                ),
               ),
             ),
           ],
         ),
-        16.sbh,
-        Container(
-          padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
-          decoration: BoxDecoration(
-            color: colorScheme.surfaceVariant,
-            borderRadius: BorderRadius.circular(32.r),
-          ),
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text(
-                '\$424 of \$920 spent',
-                style: textTheme.bodyMedium,
-              ),
-              8.sbw,
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 4.h),
-                decoration: BoxDecoration(
-                  color: colorScheme.tertiaryContainer,
-                  borderRadius: BorderRadius.circular(32.r),
-                ),
-                child: Text(
-                  '+ 15% than last month',
-                  style: textTheme.bodySmall?.copyWith(
-                    color: colorScheme.onTertiaryContainer,
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
       ],
     );
   }
-} 
+}
